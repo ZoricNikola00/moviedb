@@ -16,7 +16,7 @@ const AppProvider = ({ children }) => {
 
 const [movies,dispatch]=useReducer(reducer,[],()=>{
   const localData=localStorage.getItem('movies')
-  return localData.length<0?JSON.parse(localData):initialState
+  return localData.length>0?JSON.parse(localData):initialState
 })
 
 
