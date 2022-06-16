@@ -19,14 +19,15 @@ const Search = () => {
         else{
             navigate(`/SingleItem/${type}/${id}`)
         }
-        
     }
    
     useEffect(()=>{
         fetchData(`https://api.themoviedb.org/3/search/${searchType}?api_key=72de8895bb64376912ef844faac64a10&language=en-US&query=${q}&page=${page}`)
         window.scrollTo(0, 0);
     },[q,page,searchType])
+
   console.log(query);
+  
     return (
     <div className='searchPage'>
         <div className='searchSide'>

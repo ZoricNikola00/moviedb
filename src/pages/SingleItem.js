@@ -14,12 +14,9 @@ const SingleItem=()=>{
     useEffect(()=>{
     fetchData(`https://api.themoviedb.org/3/${t}/${id}?api_key=72de8895bb64376912ef844faac64a10&language=en-US`)
     const fetchPeople=async()=>{
-        try{
-        const response=await fetch(`https://api.themoviedb.org/3/${t}/${id}/credits?api_key=72de8895bb64376912ef844faac64a10&language=en-US`)
-        const data=await response.json()
+        const response=await axios(`https://api.themoviedb.org/3/${t}/${id}/credits?api_key=72de8895bb64376912ef844faac64a10&language=en-US`).catch((err)=>console.log(err))
+        const data=response.data
         setCast(data.cast);
-        }
-        catch(err){return console.log(err);}
     }
     fetchPeople()
     },[id])

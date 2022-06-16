@@ -2,6 +2,7 @@ import React, {useState,useEffect} from 'react'
 import { useParams,Link } from "react-router-dom";
 import { useGlobalContext } from "../context";
 import { FaImdb,FaTwitter,FaInstagram,FaFacebook } from 'react-icons/fa';
+import axios from 'axios';
 import Loading from '../Loading';
 const img_path='https://image.tmdb.org/t/p/w1280'
 const genders={
@@ -15,33 +16,28 @@ const Person = () => {
     const [movieCredits,setMovieCredits]=useState([])
     const [showBio,setShowBio]=useState(true)
     const fetchMovies=async()=>{
-        try{
-            const response=await fetch(`https://api.themoviedb.org/3/person/${id}/combined_credits?api_key=72de8895bb64376912ef844faac64a10&language=en-US`)
-            const data= await response.json()
-            if(data){    
-                setMovieCredits(data)
-            }
-            }catch(err){
-                return console.log(err);
-              }
+        const response=await axios(`https://api.themoviedb.org/3/person/${id}/combined_credits?api_key=72de8895bb64376912ef844faac64a10&language=en-US`).catch((err)=>console.log(err))
+        const data=response.data
+        if(data){    
+            setMovieCredits(data)
+        }
     }
 
     const fetchSocial=async()=>{
-            try{
-            const response=await fetch(`https://api.themoviedb.org/3/person/${id}/external_ids?api_key=72de8895bb64376912ef844faac64a10&language=en-US`)
-            const data= await response.json()
-            if(data){    
-                setSocialLinks(data)
-            }
-            }catch(err){
-                return console.log(err);
-              }
+        const response=await axios(`https://api.themoviedb.org/3/person/${id}/external_ids?api_key=72de8895bb64376912ef844faac64a10&language=en-US`).catch((err)=>console.log(err))
+        const data=response.data
+        if(data){    
+            setSocialLinks(data)
         }
+    }
+
+
     useEffect(()=>{
         fetchData(`https://api.themoviedb.org/3/person/${id}?api_key=72de8895bb64376912ef844faac64a10&language=en-US`)
         fetchMovies()
         fetchSocial()
     },[id])
+
     if(loading){
         return <Loading/>
     }
@@ -110,5 +106,3 @@ const Person = () => {
 }
 
 export default Person
-
-//                    {movieCredits.cast && movieCredits.cast.sort((a,b)=>a.release_date- b.release_date).map()}       

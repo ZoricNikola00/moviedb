@@ -1,4 +1,5 @@
 import React, { useState, useContext, useReducer, useEffect } from 'react'
+import axios from 'axios'
 import {reducer} from './reducer'
 
 const AppContext = React.createContext()
@@ -16,7 +17,7 @@ const AppProvider = ({ children }) => {
 
 const [movies,dispatch]=useReducer(reducer,[],()=>{
   const localData=localStorage.getItem('movies')
-  return localData.length<0?JSON.parse(localData):initialState
+  return localData.length>0?JSON.parse(localData):initialState
 })
 
 
@@ -35,18 +36,14 @@ localStorage.setItem('movies', JSON.stringify(movies))
 
   const fetchData=async(url)=>{
     setLoading(true)
-    try{
-    const response=await fetch(url)
-    const data=await response.json()
+    const response=await axios(url).catch((err)=>console.log(err))
+    const data=response.data
     if(data.results || data){    
     setItems(data)
     setLoading(false)}
     else{
       setError(true)
     }
-  }catch(err){
-    return console.log(err);
-  }
   }
   
   

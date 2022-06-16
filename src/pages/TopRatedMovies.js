@@ -19,23 +19,23 @@ const TRMovies = () => {
     console.log(items);
   return (
       <div className='popCont'>
-      <h1>Top Rated Movies</h1>
-    <div className='popularMovies'>
+        <h1>Top Rated Movies</h1>
+        <div className='popularMovies'>
         
         {items.results && items.results.map((item,i)=>{
-    const {original_title,vote_average,backdrop_path,id,poster_path,release_date}=item
-    const img_path='https://image.tmdb.org/t/p/w1280'
-    const t='movie'
-    const stylesRating={
-        border:vote_average>6.99?'2px solid green':vote_average>3.99?'2px solid yellow':'2px solid red'
-    }
-    const styleBookmark={
-      color:watchlist && watchlist.some(x=>x.id===id)?'rgb(196, 196, 36)':'rgb(128, 126, 126)',
-      position:'absolute',
-      left:'-80px',
-      fontSize:'25px',
-      opacity:'0.6'
-  }
+            const {original_title,vote_average,backdrop_path,id,poster_path,release_date}=item
+            const img_path='https://image.tmdb.org/t/p/w1280'
+            const t='movie'
+            const stylesRating={
+                border:vote_average>6.99?'2px solid green':vote_average>3.99?'2px solid yellow':'2px solid red'
+            }
+            const styleBookmark={
+              color:watchlist && watchlist.some(x=>x.id===id)?'rgb(196, 196, 36)':'rgb(128, 126, 126)',
+              position:'absolute',
+              left:'-80px',
+              fontSize:'25px',
+              opacity:'0.6'
+            }     
   return (
     <div className='itemPopular'>
         <div className='posterCont'>
@@ -44,8 +44,8 @@ const TRMovies = () => {
             <div style={stylesRating} className='rating'>{vote_average*10}</div>
         </div>
         <div className='popInfo'>
-        <Link className='PopTitleLink' to={`/SingleItem/${t}/${id}`}><h5>{original_title}</h5></Link>
-        <p className='date'>{release_date}</p>
+            <Link className='PopTitleLink' to={`/SingleItem/${t}/${id}`}><h5>{original_title}</h5></Link>
+            <p className='date'>{release_date}</p>
         </div>
     </div>
   )
