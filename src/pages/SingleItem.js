@@ -8,7 +8,7 @@ import axios from 'axios'
 
 const SingleItem=()=>{
     const {id,t}=useParams()
-    const {favorites,fetchData,items,loading,toggleFavorites,watchlist}=useGlobalContext()
+    const {favorites,fetchData,items,loading,toggle,watchlist}=useGlobalContext()
     const [cast,setCast]=useState([])
     const img_path='https://image.tmdb.org/t/p/w1280'
     
@@ -42,7 +42,7 @@ console.log(t);
         <div className="background"><img src={`${img_path}${backdrop_path}`} alt='*'/></div>
         <div className="imgContainerSingle">
             <img className="singleImg" src={`${img_path}${poster_path}`} alt='*'/>
-            <div name='watchlist' className="bookmark" onClick={(e)=>toggleFavorites(id,title,poster_path,t,e.currentTarget.attributes.name.value)}><FaBookmark style={styleBookmark} className="star"/></div>
+            <div name='watchlist' className="bookmark" onClick={(e)=>toggle(id,title,poster_path,t,e.currentTarget.attributes.name.value)}><FaBookmark style={styleBookmark} className="star"/></div>
         </div>
         
         <div className="singleContInfo">
@@ -59,7 +59,7 @@ console.log(t);
             <div className="ratCont">
                 <div style={stylesRating} className="ratingSingle">{vote_average && vote_average}</div>
                 <p>Rating</p>
-                <div name='favorite' onClick={(e)=>toggleFavorites(id,title,poster_path,t,e.currentTarget.attributes.name.value)}><FaStar style={styleStar} className="star"/></div>
+                <div name='favorite' onClick={(e)=>toggle(id,title,poster_path,t,e.currentTarget.attributes.name.value)}><FaStar style={styleStar} className="star"/></div>
             </div>
             {tagline && <div className="tagline">{tagline}</div>}
             <div className="overview"><h4>Overview</h4><p>{overview && overview}</p> </div>

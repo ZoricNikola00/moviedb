@@ -5,7 +5,7 @@ import { useGlobalContext } from "../context";
 import { FaArrowLeft,FaArrowRight,FaBookmark} from 'react-icons/fa';
 
 const TopTvShows = () => {
-    const {items,loading,error,fetchData,toggleFavorites,watchlist}=useGlobalContext()
+    const {items,loading,error,fetchData,toggle,watchlist}=useGlobalContext()
     const [page,setPage]=useState(1)
     useEffect(()=>{
         fetchData(` https://api.themoviedb.org/3/tv/top_rated?api_key=72de8895bb64376912ef844faac64a10&language=en-US&page=${page}`)
@@ -41,7 +41,7 @@ const TopTvShows = () => {
         <div className='posterCont'>
             <Link to={`/SingleItem/${t}/${id}`}><img className='itemImg' src={`${img_path}${poster_path}`}/></Link>
             <div style={stylesRating} className='rating'>{vote_average*10}</div>
-            <div name='watchlist' className="bookmark" onClick={(e)=>toggleFavorites(id,name,poster_path,t,e.currentTarget.attributes.name.value)}><FaBookmark style={styleBookmark} className="star"/></div>
+            <div name='watchlist' className="bookmark" onClick={(e)=>toggle(id,name,poster_path,t,e.currentTarget.attributes.name.value)}><FaBookmark style={styleBookmark} className="star"/></div>
         </div>
         <div className='popInfo'>
             <Link className='PopTitleLink' to={`/SingleItem/${t}/${id}`}><h5>{name}</h5></Link>

@@ -1,6 +1,6 @@
 
 export const reducer=(state,action)=>{
-    if(action.type==='TOGGLE_FAVORITE'){
+    if(action.type==='TOGGLE'){
         if(action.which==='favorite'){
           if(state.favorites.some(x=>parseInt(x.id)===parseInt(action.movie.id))){
               return  {...state, favorites:state.favorites.filter(x=>action.movie.id!==x.id)}
@@ -37,13 +37,13 @@ export const reducer=(state,action)=>{
         }
 }
 
-    if(action.type==='REMOVE_FAVOIRTE'){
+    if(action.type==='REMOVE'){
         if(action.which==='favorite'){
-        return {...state, favorites:state.favorites.filter(x=>action.id!==x.id)}
+            return {...state, favorites:state.favorites.filter(x=>action.id!==x.id)}
             }
-            if(action.which==='watchlist'){
-                return {...state, watchlist:state.watchlist.filter(x=>action.id!==x.id)}
-            }    
+        if(action.which==='watchlist'){
+            return {...state, watchlist:state.watchlist.filter(x=>action.id!==x.id)}
+        }    
 }
     
 }

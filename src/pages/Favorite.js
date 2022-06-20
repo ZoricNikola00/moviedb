@@ -5,7 +5,7 @@ import { useGlobalContext } from '../context'
 const img_path='https://image.tmdb.org/t/p/w1280'
 
 const Favorite = () => {
-    const {removeFavorites,favorites}=useGlobalContext()
+    const {remove,favorites}=useGlobalContext()
   return (
     <div className='favorites'>
         <h1>Favorite</h1>
@@ -16,7 +16,7 @@ const Favorite = () => {
                 return <div key={id} className='favoriteMovie'>
                    <Link to={`/SingleItem/${media}/${id}/`}><img src={`${img_path}${img}`}/>
                     <h4>{title}</h4></Link>
-                    <button name='favorite' className='rmvFav' onClick={(e)=>removeFavorites(id,e.currentTarget.attributes.name.value)}><FaTimes/></button>
+                    <button name='favorite' className='rmvFav' onClick={(e)=>remove(id,e.currentTarget.attributes.name.value)}><FaTimes/></button>
                 </div>
             })}
         </div>

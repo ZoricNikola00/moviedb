@@ -21,14 +21,14 @@ const [movies,dispatch]=useReducer(reducer,[],()=>{
 })
 
 
-const toggleFavorites=(id,title,img,media,which)=>{
-  dispatch({type:'TOGGLE_FAVORITE',movie:{
+const toggle=(id,title,img,media,which)=>{
+  dispatch({type:'TOGGLE',movie:{
     id,title,img,media
   },which:which})
 }
 
-const removeFavorites=(id,which)=>{
-  dispatch({type:'REMOVE_FAVOIRTE',id:id,which:which})
+const remove=(id,which)=>{
+  dispatch({type:'REMOVE',id:id,which:which})
 }
 useEffect(()=>{
 localStorage.setItem('movies', JSON.stringify(movies))
@@ -51,7 +51,7 @@ localStorage.setItem('movies', JSON.stringify(movies))
   
 
 
-  return <AppContext.Provider value={{removeFavorites,...movies,toggleFavorites,query,setQuery,error,loading,fetchData,setDropCheck,dropCheck,items}}>{children}</AppContext.Provider>
+  return <AppContext.Provider value={{remove,...movies,toggle,query,setQuery,error,loading,fetchData,setDropCheck,dropCheck,items}}>{children}</AppContext.Provider>
 }
 // make sure use
 export const useGlobalContext = () => {

@@ -5,7 +5,7 @@ import { useGlobalContext } from "../context";
 import { FaArrowLeft,FaArrowRight,FaBookmark} from 'react-icons/fa';
 
 const TRMovies = () => {
-    const {items,loading,error,fetchData,toggleFavorites,watchlist}=useGlobalContext()
+    const {items,loading,error,fetchData,toggle,watchlist}=useGlobalContext()
     const [page,setPage]=useState(1)
     useEffect(()=>{
         fetchData(`https://api.themoviedb.org/3/movie/top_rated?api_key=72de8895bb64376912ef844faac64a10&language=en-US&page=${page}`)
@@ -39,7 +39,7 @@ const TRMovies = () => {
   return (
     <div className='itemPopular'>
         <div className='posterCont'>
-            <div name='watchlist' className="bookmark" onClick={(e)=>toggleFavorites(id,original_title,poster_path,t,e.currentTarget.attributes.name.value)}><FaBookmark style={styleBookmark} className="star"/></div>
+            <div name='watchlist' className="bookmark" onClick={(e)=>toggle(id,original_title,poster_path,t,e.currentTarget.attributes.name.value)}><FaBookmark style={styleBookmark} className="star"/></div>
             <Link to={`/SingleItem/${t}/${id}`}><img className='itemImg' src={`${img_path}${poster_path}`}/></Link>
             <div style={stylesRating} className='rating'>{vote_average*10}</div>
         </div>
