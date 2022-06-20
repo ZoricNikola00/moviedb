@@ -30,7 +30,7 @@ const TRMovies = () => {
                 border:vote_average>6.99?'2px solid green':vote_average>3.99?'2px solid yellow':'2px solid red'
             }
             const styleBookmark={
-              color:watchlist && watchlist.some(x=>x.id===id)?'rgb(196, 196, 36)':'rgb(128, 126, 126)',
+              color:watchlist && watchlist.some(x=>parseInt(x.id)===parseInt(id))?'rgb(196, 196, 36)':'rgb(128, 126, 126)',
               position:'absolute',
               left:'-80px',
               fontSize:'25px',

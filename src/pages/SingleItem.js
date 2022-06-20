@@ -3,6 +3,7 @@ import { useParams,Link } from "react-router-dom";
 import { useGlobalContext } from "../context";
 import Loading from "../Loading";
 import {FaArrowRight,FaLink,FaStar,FaBookmark} from 'react-icons/fa';
+import axios from 'axios'
 
 
 const SingleItem=()=>{
@@ -28,10 +29,10 @@ const SingleItem=()=>{
     const stylesRating={
     border:vote_average>6.99?'4px solid green':vote_average>3.99?'4px solid yellow':'4px solid red'   }
     const styleStar={
-     color:favorites && favorites.some(x=>x.id===id)?'rgb(196, 196, 36)':'rgb(128, 126, 126)'
+     color:favorites && favorites.some(x=>parseInt(x.id)===parseInt(id))?'rgb(196, 196, 36)':'rgb(128, 126, 126)'
     }
     const styleBookmark={
-        color:watchlist && watchlist.some(x=>x.id===id)?'rgb(196, 196, 36)':'rgb(128, 126, 126)'
+        color:watchlist && watchlist.some(x=>parseInt(x.id)===parseInt(id))?'rgb(196, 196, 36)':'rgb(128, 126, 126)'
     }
 const title=t==='movie'?original_title:name
 const date=release_date && t==='movie'?release_date.slice(0,4): first_air_date && first_air_date.slice(0,4)!==last_air_date.slice(0,4)?`${first_air_date.slice(0,4)}-${last_air_date.slice(0,4)}`:`${first_air_date && first_air_date.slice(0,4)}-`

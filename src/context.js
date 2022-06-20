@@ -37,12 +37,14 @@ localStorage.setItem('movies', JSON.stringify(movies))
   const fetchData=async(url)=>{
     setLoading(true)
     const response=await axios(url).catch((err)=>console.log(err))
-    const data=response.data
-    if(data.results || data){    
-    setItems(data)
-    setLoading(false)}
-    else{
-      setError(true)
+    if(response){
+      const data=response.data
+      if(data.results || data){    
+      setItems(data)
+      setLoading(false)}
+      else{
+        setError(true)
+      }
     }
   }
   
